@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment JooHosting</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #121212;
+            color: #ffffff;
+        }
+        .blink {
+            font-weight: bold;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0% { color: red; }
+            25% { color: yellow; }
+            50% { color: green; }
+            75% { color: blue; }
+            100% { color: red; }
+        }
+        .payment-box {
+            margin-top: 20px;
+            padding: 20px;
+            border: 2px solid #ffffff;
+            display: inline-block;
+            background: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        button {
+            margin: 5px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #ff4444;
+            border: none;
+            color: white;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #ff6666;
+        }
+        input[type='file'] {
+            display: block;
+            margin: 10px auto;
+        }
+        img.qris {
+            width: 150px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Payment JooHosting!</h2>
+    <p class="blink">Payment bebas pajak saat transfer!</p>
+    
+    <div class="payment-box">
+        <h3>Scan QRIS</h3>
+        <img class="qris" src="https://img5.pixhost.to/images/3063/569619680_skyzopedia.jpg" alt="QRIS Payment">
+        <p>
+            <button onclick="copyToClipboard('083822438936', 'Dana')">Nope Dana</button>
+            <button onclick="copyToClipboard('083822438936', 'Gopay')">Nope Gopay</button>
+            <button onclick="copyToClipboard('083822438936', 'BRI')">Nope BRI</button>
+            <button onclick="copyToClipboard('083822438936', 'OVO')">Nope OVO</button>
+        </p>
+    </div>
+    
+    <h3>Kirim Bukti Transfer</h3>
+    <input type="file" id="buktiTf" accept="image/*">
+    <button onclick="sendBukti()">Kirim Bukti</button>
+    
+    <p style="color: #bbbbbb;">Sertakan bukti transfer supaya terhindar dari scam/penipuan, Be smart buyer and seller!</p>
+    
+    <script>
+        function copyToClipboard(text, provider) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert(provider + " berhasil disalin: " + text);
+            });
+        }
+        
+        function sendBukti() {
+            let fileInput = document.getElementById('buktiTf');
+            if (fileInput.files.length === 0) {
+                alert("Silakan unggah bukti transfer terlebih dahulu.");
+                return;
+            }
+            
+            let nomorTujuan = '6283151020504';
+            let message = "Halo, saya sudah melakukan transfer. Berikut bukti transfer saya.";
+            let waLink = `https://wa.me/${nomorTujuan}?text=${encodeURIComponent(message)}`;
+            window.open(waLink, '_blank');
+        }
+    </script>
+</body>
+</html>
